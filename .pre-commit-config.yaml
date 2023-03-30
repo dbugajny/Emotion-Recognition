@@ -1,0 +1,11 @@
+repos:
+-   repo: local
+    hooks:
+    -   id: black
+        name: changelogs must be rst
+        entry: black -l 120
+        language: python
+    -   id: isort
+        name: isort
+        entry: isort
+        language: python
