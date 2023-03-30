@@ -1,0 +1,8 @@
+repos:
+-   repo: local
+    rev: 22.10.0
+    hooks:
+    -   id: black
+        name: changelogs must be rst
+        entry: black -l 120
+        language: python
