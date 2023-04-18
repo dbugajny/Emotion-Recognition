@@ -1,4 +1,5 @@
 import pandas as pd
+import re
 
 
 class BaseTransformer:
@@ -10,6 +11,5 @@ class BaseTransformer:
         return df.loc[:, self.columns_to_keep].rename(self.rename_map)
 
     @staticmethod
-    def extract_person_id(df, filename):
-        return df.assign(id_person=filename)
-
+    def extract_person_id(df: pd.DataFrame, filename: str) -> pd.DataFrame:
+        return df.assign(id_person=re.search(r"[Ss]\d{2,3}", filename))
