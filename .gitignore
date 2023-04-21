@@ -3,3 +3,5 @@
 build/
 *.csv
 *.parquet
+data/*
+!data/.gitkeep
