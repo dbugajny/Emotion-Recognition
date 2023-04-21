@@ -3,4 +3,6 @@
 build/
 *.csv
 *.parquet
-data
+data/*
+!data/.gitkeep
+notebooks/private
