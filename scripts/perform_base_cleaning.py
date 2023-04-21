@@ -1,4 +1,5 @@
 import pandas as pd
+import re
 
 from emotion_recognition.data_transformers.base_transformer import BaseTransformer
 from constants import TRANSFORMERS, DATA_RAW_PATHS, DATA_INTERMEDIATE_PATHS
@@ -15,6 +16,8 @@ def main() -> None:
     for transformer, raw_path, intermediate_path in zip(TRANSFORMERS, DATA_RAW_PATHS, DATA_INTERMEDIATE_PATHS):
         intermediate_path.mkdir(parents=True, exist_ok=True)
         for filepath in raw_path.iterdir():
+            if filepath.suffix != ".csv" or not re.search(r"[Ss]\d{2,3}", filepath.stem):
+                continue
             df = pd.read_csv(filepath)
             df = perform_base_cleaning(df, transformer, filepath.stem)
             df.to_parquet(intermediate_path)
