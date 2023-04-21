@@ -5,4 +5,6 @@ build/
 *.parquet
 data/*
 !data/.gitkeep
-notebooks/private
+notebooks/private/*
+!notebooks/private/.gitkeep
+
