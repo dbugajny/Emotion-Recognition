@@ -1,9 +1,10 @@
+from pathlib import Path
+
 from emotion_recognition.data_transformers.annotations_transformer import AnnotationsTransformer
 from emotion_recognition.data_transformers.bilatino_transformer import BilatinoTransformer
 from emotion_recognition.data_transformers.fixations_transformer import FixationsTransformer
 from emotion_recognition.data_transformers.pupil_positions_transformer import PupilPositionsTransformer
 from emotion_recognition.data_transformers.rating_transformer import RatingTransformer
-from pathlib import Path
 
 TRANSFORMERS = [
     AnnotationsTransformer(),

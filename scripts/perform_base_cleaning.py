@@ -1,8 +1,10 @@
-import pandas as pd
 import re
+from pathlib import Path
+
+import pandas as pd
+from constants import DATA_INTERMEDIATE_PATHS, DATA_RAW_PATHS, TRANSFORMERS
 
 from emotion_recognition.data_transformers.base_transformer import BaseTransformer
-from constants import TRANSFORMERS, DATA_RAW_PATHS, DATA_INTERMEDIATE_PATHS
 
 
 def perform_base_cleaning(df: pd.DataFrame, transformer: BaseTransformer, filename: str) -> pd.DataFrame:
@@ -20,7 +22,7 @@ def main() -> None:
                 continue
             df = pd.read_csv(filepath)
             df = perform_base_cleaning(df, transformer, filepath.stem)
-            df.to_parquet(intermediate_path)
+            df.to_parquet(intermediate_path / Path(filepath.stem).with_suffix(".parquet"))
 
 
 if __name__ == "__main__":
