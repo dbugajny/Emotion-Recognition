@@ -1,4 +1,4 @@
-from base_transformer import BaseTransformer
+from emotion_recognition.data_transformers.base_transformer import BaseTransformer
 
 
 class BilatinoTransformer(BaseTransformer):

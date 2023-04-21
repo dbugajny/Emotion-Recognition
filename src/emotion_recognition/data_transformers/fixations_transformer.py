@@ -1,4 +1,4 @@
-from base_transformer import BaseTransformerFixAnn
+from emotion_recognition.data_transformers.base_transformer import BaseTransformerFixAnn
 
 
 class FixationsTransformer(BaseTransformerFixAnn):
