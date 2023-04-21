@@ -12,10 +12,12 @@ def perform_base_cleaning(df: pd.DataFrame, transformer: BaseTransformer, filena
 
 
 def main() -> None:
-    for transformer, raw_path in zip(TRANSFORMERS, DATA_RAW_PATHS):
+    for transformer, raw_path, intermediate_path in zip(TRANSFORMERS, DATA_RAW_PATHS, DATA_INTERMEDIATE_PATHS):
+        intermediate_path.mkdir(parents=True, exist_ok=True)
         for filepath in raw_path.iterdir():
             df = pd.read_csv(filepath)
             df = perform_base_cleaning(df, transformer, filepath.stem)
+            df.to_parquet(intermediate_path)
 
 
 if __name__ == "__main__":
