@@ -6,11 +6,11 @@ from emotion_recognition.data_transformers.rating_transformer import RatingTrans
 from pathlib import Path
 
 TRANSFORMERS = [
-    AnnotationsTransformer,
-    BilatinoTransformer,
-    FixationsTransformer,
-    PupilPositionsTransformer,
-    RatingTransformer,
+    AnnotationsTransformer(),
+    BilatinoTransformer(),
+    FixationsTransformer(),
+    PupilPositionsTransformer(),
+    RatingTransformer(),
 ]
 
 DATA_RAW_PATHS = [
