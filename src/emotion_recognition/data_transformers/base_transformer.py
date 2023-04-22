@@ -13,7 +13,7 @@ class BaseTransformer:
 
     @staticmethod
     def extract_person_id(df: pd.DataFrame, filename: str) -> pd.DataFrame:
-        return df.assign(id_person=re.search(r"[Ss]\d{2,3}", filename))
+        return df.assign(id_person=re.search(r"[Ss]\d{2,3}", filename).group(0))
 
 
 class BaseTransformerFixAnn(BaseTransformer):
