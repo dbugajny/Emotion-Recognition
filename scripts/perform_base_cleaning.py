@@ -2,7 +2,7 @@ import re
 from pathlib import Path
 
 import pandas as pd
-from constants import DATA_SOURCES, DATA_INTERMEDIATE_PATHS, DATA_RAW_PATHS, TRANSFORMERS
+from constants import DATA_INTERMEDIATE_PATHS, DATA_RAW_PATHS, TRANSFORMERS
 from tqdm import tqdm
 
 from emotion_recognition.data_transformers.base_transformer import BaseTransformer
@@ -16,7 +16,15 @@ def single_base_cleaning(df: pd.DataFrame, transformer: BaseTransformer, filenam
 
 
 def perform_base_cleaning() -> None:
-    for data_source in DATA_SOURCES:
+    data_sources = [
+        "annotations",
+        "bitalino",
+        "fixations",
+        "pupil_positions",
+        "rating",
+    ]
+
+    for data_source in data_sources:
         DATA_INTERMEDIATE_PATHS[data_source].mkdir(parents=True, exist_ok=True)
         for filepath in tqdm(
             DATA_RAW_PATHS[data_source].iterdir(),

@@ -9,7 +9,7 @@ class BaseTransformer:
         self.rename_map = {}
 
     def perform_base_cleaning(self, df: pd.DataFrame) -> pd.DataFrame:
-        return df.loc[:, self.columns_to_keep].rename(self.rename_map)
+        return df.loc[:, self.columns_to_keep].rename(columns=self.rename_map)
 
     @staticmethod
     def extract_person_id(df: pd.DataFrame, filename: str) -> pd.DataFrame:

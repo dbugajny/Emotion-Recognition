@@ -6,13 +6,6 @@ from emotion_recognition.data_transformers.fixations_transformer import Fixation
 from emotion_recognition.data_transformers.pupil_positions_transformer import PupilPositionsTransformer
 from emotion_recognition.data_transformers.rating_transformer import RatingTransformer
 
-DATA_SOURCES = [
-    "annotations",
-    "bitalino",
-    "fixations",
-    "pupil_positions",
-    "rating",
-]
 
 TRANSFORMERS = {
     "annotations": AnnotationsTransformer(),
