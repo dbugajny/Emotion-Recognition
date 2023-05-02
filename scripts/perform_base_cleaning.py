@@ -2,7 +2,7 @@ import re
 from pathlib import Path
 
 import pandas as pd
-from constants import DATA_INTERMEDIATE_PATHS, DATA_RAW_PATHS, TRANSFORMERS
+from constants import DATA_SOURCES, DATA_INTERMEDIATE_PATHS, DATA_RAW_PATHS, TRANSFORMERS
 from tqdm import tqdm
 
 from emotion_recognition.data_transformers.base_transformer import BaseTransformer
@@ -16,16 +16,18 @@ def perform_base_cleaning(df: pd.DataFrame, transformer: BaseTransformer, filena
 
 
 def main() -> None:
-    for transformer, raw_path, intermediate_path in zip(TRANSFORMERS, DATA_RAW_PATHS, DATA_INTERMEDIATE_PATHS):
-        intermediate_path.mkdir(parents=True, exist_ok=True)
+    for data_source in DATA_SOURCES:
+        DATA_INTERMEDIATE_PATHS[data_source].mkdir(parents=True, exist_ok=True)
         for filepath in tqdm(
-            raw_path.iterdir(), total=len(list(raw_path.iterdir())), desc=f"Processing {raw_path.stem} directory."
+            DATA_RAW_PATHS[data_source].iterdir(),
+            total=len(list(DATA_RAW_PATHS[data_source].iterdir())),
+            desc=f"Processing {DATA_RAW_PATHS[data_source].stem} directory.",
         ):
             if filepath.suffix != ".csv" or not re.search(r"[Ss]\d{2,3}", filepath.stem):
                 continue
             df = pd.read_csv(filepath)
-            df = perform_base_cleaning(df, transformer, filepath.stem)
-            df.to_parquet(intermediate_path / Path(filepath.stem).with_suffix(".parquet"))
+            df = perform_base_cleaning(df, TRANSFORMERS[data_source], filepath.stem)
+            df.to_parquet(DATA_INTERMEDIATE_PATHS[data_source] / Path(filepath.stem).with_suffix(".parquet"))
 
 
 if __name__ == "__main__":
