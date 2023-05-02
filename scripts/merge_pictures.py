@@ -13,7 +13,7 @@ def _prepare_key_pictures():
 
 
 def merge_ratings_with_key_pictures():
-    key_pictures = prepare_key_pictures()
+    key_pictures = _prepare_key_pictures()
     rating_transformer = TRANSFORMERS["rating"]
 
     DATA_PRIMARY_PATHS["rating"].mkdir(parents=True, exist_ok=True)

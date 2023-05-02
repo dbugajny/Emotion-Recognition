@@ -7,5 +7,5 @@ repos:
         language: python
     -   id: isort
         name: isort
-        entry: isort
+        entry: isort -l 120
         language: python
