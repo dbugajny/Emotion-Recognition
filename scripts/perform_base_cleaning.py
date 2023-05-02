@@ -8,14 +8,14 @@ from tqdm import tqdm
 from emotion_recognition.data_transformers.base_transformer import BaseTransformer
 
 
-def perform_base_cleaning(df: pd.DataFrame, transformer: BaseTransformer, filename: str) -> pd.DataFrame:
+def single_base_cleaning(df: pd.DataFrame, transformer: BaseTransformer, filename: str) -> pd.DataFrame:
     df = transformer.perform_base_cleaning(df)
     df = transformer.extract_person_id(df, filename)
 
     return df
 
 
-def main() -> None:
+def perform_base_cleaning() -> None:
     for data_source in DATA_SOURCES:
         DATA_INTERMEDIATE_PATHS[data_source].mkdir(parents=True, exist_ok=True)
         for filepath in tqdm(
@@ -26,9 +26,9 @@ def main() -> None:
             if filepath.suffix != ".csv" or not re.search(r"[Ss]\d{2,3}", filepath.stem):
                 continue
             df = pd.read_csv(filepath)
-            df = perform_base_cleaning(df, TRANSFORMERS[data_source], filepath.stem)
+            df = single_base_cleaning(df, TRANSFORMERS[data_source], filepath.stem)
             df.to_parquet(DATA_INTERMEDIATE_PATHS[data_source] / Path(filepath.stem).with_suffix(".parquet"))
 
 
 if __name__ == "__main__":
-    main()
+    perform_base_cleaning()

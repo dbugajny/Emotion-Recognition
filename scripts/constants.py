@@ -38,4 +38,12 @@ DATA_INTERMEDIATE_PATHS = {
     "rating": Path("data/02_intermediate/rating"),
 }
 
+DATA_PRIMARY_PATHS = {
+    "annotations": Path("data/03_primary/annotations"),
+    "bitalino": Path("data/03_primary/bitalino"),
+    "fixations": Path("data/03_primary/fixations"),
+    "pupil_positions": Path("data/03_primary/pupil_positions"),
+    "rating": Path("data/03_primary/rating"),
+}
+
 KEY_PICTURE_PATH = Path("data/01_raw/__documents/key_pic.xlsx")

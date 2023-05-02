@@ -1,7 +1,7 @@
-from emotion_recognition.data_transformers.base_transformer import BaseTransformerFixAnn
+from emotion_recognition.data_transformers.base_transformer import BaseTransformerFixPP
 
 
-class PupilPositionsTransformer(BaseTransformerFixAnn):
+class PupilPositionsTransformer(BaseTransformerFixPP):
     def __init__(self) -> None:
         super().__init__()
         self.columns_to_keep = [
