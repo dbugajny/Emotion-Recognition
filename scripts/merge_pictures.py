@@ -1,9 +1,11 @@
-import pandas as pd
-from constants import KEY_PICTURE_PATH, TRANSFORMERS, DATA_INTERMEDIATE_PATHS, DATA_PRIMARY_PATHS
-from pathlib import Path
-import numpy as np
 import re
+from pathlib import Path
+
+import numpy as np
+import pandas as pd
+from constants import DATA_INTERMEDIATE_PATHS, DATA_PRIMARY_PATHS, KEY_PICTURE_PATH, TRANSFORMERS
 from tqdm import tqdm
+
 
 def prepare_key_pictures():
     key_pictures = pd.read_excel(KEY_PICTURE_PATH)
