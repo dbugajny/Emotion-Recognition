@@ -7,7 +7,7 @@ from constants import DATA_INTERMEDIATE_PATHS, DATA_PRIMARY_PATHS, KEY_PICTURE_P
 from tqdm import tqdm
 
 
-def prepare_key_pictures():
+def _prepare_key_pictures():
     key_pictures = pd.read_excel(KEY_PICTURE_PATH)
     return key_pictures.replace("n/d", None).astype({"valence_norm": np.float64, "arousal_norm": np.float64})
 
