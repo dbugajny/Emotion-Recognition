@@ -37,9 +37,9 @@ def merge_fix_pp_with_annotations_and_ratings():
             df_annotations_filepath = DATA_INTERMEDIATE_PATHS["annotations"] / re.sub(r"_(f|p)\.", "_a.", filepath.name)
             df_annotations = pd.read_parquet(df_annotations_filepath)
 
-            id_person = re.search(r"[Ss]\d{2,3}", filepath.stem).group(0).upper()
+            person_id = re.search(r"[Ss]\d{2,3}", filepath.stem).group(0).upper()
 
-            df_ratings_filepath = [r_fp for r_fp in rating_filepaths if r_fp.stem.upper().find(id_person)]
+            df_ratings_filepath = [r_fp for r_fp in rating_filepaths if person_id in r_fp.stem.upper()]
             df_ratings = pd.read_parquet(df_ratings_filepath[0])
 
             df = pd.read_parquet(filepath)
@@ -57,9 +57,9 @@ def merge_bitalino_with_ratings():
         total=len(list(DATA_INTERMEDIATE_PATHS["bitalino"].iterdir())),
         desc=f"Processing {DATA_INTERMEDIATE_PATHS['bitalino'].stem} directory.",
     ):
-        id_person = re.search(r"[Ss]\d{2,3}", filepath.stem).group(0).upper()
+        person_id = re.search(r"[Ss]\d{2,3}", filepath.stem).group(0).upper()
 
-        df_ratings_filepath = [r_fp for r_fp in rating_filepaths if r_fp.stem.upper().find(id_person)]
+        df_ratings_filepath = [r_fp for r_fp in rating_filepaths if person_id in r_fp.stem.upper()]
         df_ratings = pd.read_parquet(df_ratings_filepath[0])
 
         df = pd.read_parquet(filepath)

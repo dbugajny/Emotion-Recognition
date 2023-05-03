@@ -13,7 +13,7 @@ class BaseTransformer:
 
     @staticmethod
     def extract_person_id(df: pd.DataFrame, filename: str) -> pd.DataFrame:
-        return df.assign(id_person=re.search(r"[Ss]\d{2,3}", filename).group(0).upper())
+        return df.assign(person_id=re.search(r"[Ss]\d{2,3}", filename).group(0).upper())
 
 
 class BaseTransformerFixPP(BaseTransformer):
@@ -27,6 +27,6 @@ class BaseTransformerFixPP(BaseTransformer):
 
     @staticmethod
     def merge_with_annotations_and_ratings(df, df_annotations, df_ratings):
-        return pd.merge_asof(df, df_annotations, left_on="tm_start", right_on="timestamp").merge(
-            df_ratings, how="left", on="image_id"
+        return pd.merge_asof(df, df_annotations, on="timestamp").merge(
+            df_ratings, how="left", on=["image_id", "person_id"]
         )

@@ -9,4 +9,4 @@ class BitalinoTransformer(BaseTransformer):
 
     @staticmethod
     def merge_with_ratings(df, df_ratings):
-        return df.merge(df_ratings, how="left", on="image_id")
+        return df.merge(df_ratings, how="left", on=["image_id", "person_id"])
