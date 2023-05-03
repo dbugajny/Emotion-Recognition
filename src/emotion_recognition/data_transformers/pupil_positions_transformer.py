@@ -12,7 +12,6 @@ class PupilPositionsTransformer(BaseTransformerFixPP):
             "norm_pos_y",
             "diameter",
             "method",
-            "model_confidence",
         ]
-        self.rename_map = {"pupil_timestamp": "tm_start"}
+        self.rename_map = {"pupil_timestamp": "timestamp"}
         self.method = "2d c++"

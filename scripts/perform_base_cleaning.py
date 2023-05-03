@@ -1,11 +1,23 @@
 import re
 from pathlib import Path
 
+import numpy as np
 import pandas as pd
 from constants import DATA_INTERMEDIATE_PATHS, DATA_RAW_PATHS, TRANSFORMERS
 from tqdm import tqdm
 
 from emotion_recognition.data_transformers.base_transformer import BaseTransformer
+
+
+def prepare_key_pictures():
+    key_picture = (
+        pd.read_excel(DATA_RAW_PATHS["key_pictures"])
+        .replace("n/d", None)
+        .astype({"valence_norm": np.float64, "arousal_norm": np.float64})
+        .loc[:, ["name", "trigger", "valence_norm", "arousal_norm"]]
+        .rename(columns={"name": "image_name", "trigger": "image_id"})
+    )
+    key_picture.to_parquet(DATA_INTERMEDIATE_PATHS["key_pictures"])
 
 
 def _single_base_cleaning(df: pd.DataFrame, transformer: BaseTransformer, filename: str) -> pd.DataFrame:
@@ -40,3 +52,4 @@ def perform_base_cleaning() -> None:
 
 if __name__ == "__main__":
     perform_base_cleaning()
+    prepare_key_pictures()
