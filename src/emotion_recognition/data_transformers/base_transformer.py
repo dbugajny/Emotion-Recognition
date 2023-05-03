@@ -28,5 +28,5 @@ class BaseTransformerFixPP(BaseTransformer):
     @staticmethod
     def merge_with_annotations_and_ratings(df, df_annotations, df_ratings):
         return pd.merge_asof(df, df_annotations, left_on="tm_start", right_on="timestamp").merge(
-            df_ratings, how="left", left_on="UnityTriggertrigger", right_on="trigger"
+            df_ratings, how="left", on="image_id"
         )
