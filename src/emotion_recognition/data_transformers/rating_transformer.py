@@ -13,4 +13,6 @@ class RatingTransformer(BaseTransformer):
 
     @staticmethod
     def merge_with_key_pictures(df, df_key_pictures):
-        return df.merge(df_key_pictures, how="left", on="image_name")
+        return (
+            df.merge(df_key_pictures, how="left", on="image_name").drop(columns="image_name").dropna(subset="image_id")
+        )

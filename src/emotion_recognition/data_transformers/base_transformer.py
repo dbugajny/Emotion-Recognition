@@ -9,7 +9,7 @@ class BaseTransformer:
         self.rename_map = {}
 
     def perform_base_cleaning(self, df: pd.DataFrame) -> pd.DataFrame:
-        return df.loc[:, self.columns_to_keep].rename(columns=self.rename_map)
+        return df.loc[:, self.columns_to_keep].rename(columns=self.rename_map).drop_duplicates()
 
     @staticmethod
     def extract_person_id(df: pd.DataFrame, filename: str) -> pd.DataFrame:
@@ -27,6 +27,6 @@ class BaseTransformerFixPP(BaseTransformer):
 
     @staticmethod
     def merge_with_annotations_and_ratings(df, df_annotations, df_ratings):
-        return pd.merge_asof(df, df_annotations, on="timestamp").merge(
+        return pd.merge_asof(df, df_annotations.drop(columns="person_id"), on="timestamp").merge(
             df_ratings, how="left", on=["image_id", "person_id"]
         )
