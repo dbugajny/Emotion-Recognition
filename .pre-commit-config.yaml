@@ -1,11 +1,25 @@
 repos:
--   repo: local
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
     hooks:
-    -   id: black
-        name: changelogs must be rst
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+  - repo: https://github.com/charliermarsh/ruff-pre-commit
+    rev: 'v0.0.257'
+    hooks:
+    - id: ruff
+      args: [ --fix, --exit-non-zero-on-fix, --line-length=120]
+  - repo: local
+    hooks:
+      - id: black
+        name: black
         entry: black -l 120
         language: python
-    -   id: isort
+      - id: isort
         name: isort
         entry: isort -l 120
+        language: python
+      - id: flake8
+        name: flake8
+        entry: flake8 --max-line-length 120
         language: python
