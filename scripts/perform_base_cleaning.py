@@ -17,6 +17,11 @@ def prepare_key_pictures():
         .loc[:, ["name", "trigger", "valence_norm", "arousal_norm"]]
         .rename(columns={"name": "image_name", "trigger": "image_id"})
     )
+    key_picture_not_hi = key_picture[~key_picture["image_name"].str.startswith("hi_")].drop(columns="image_id")
+    key_picture_hi = key_picture_not_hi.assign(image_name="hi_" + key_picture_not_hi["image_name"])
+    key_picture_filled = pd.concat([key_picture_not_hi, key_picture_hi])
+    key_picture.loc[:, ["image_name", "image_id"]].merge(key_picture_filled, how="left", on="image_name")
+
     key_picture.to_parquet(DATA_INTERMEDIATE_PATHS["key_pictures"])
 
 
