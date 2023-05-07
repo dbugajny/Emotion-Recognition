@@ -10,19 +10,17 @@ from emotion_recognition.data_transformers.base_transformer import BaseTransform
 
 
 def prepare_key_pictures():
-    key_picture = (
+    key_pictures = (
         pd.read_excel(DATA_RAW_PATHS["key_pictures"])
         .replace("n/d", None)
         .astype({"valence_norm": np.float64, "arousal_norm": np.float64})
-        .loc[:, ["name", "trigger", "valence_norm", "arousal_norm"]]
         .rename(columns={"name": "image_name", "trigger": "image_id"})
     )
-    key_picture_not_hi = key_picture[~key_picture["image_name"].str.startswith("hi_")].drop(columns="image_id")
-    key_picture_hi = key_picture_not_hi.assign(image_name="hi_" + key_picture_not_hi["image_name"])
-    key_picture_filled = pd.concat([key_picture_not_hi, key_picture_hi])
-    key_picture.loc[:, ["image_name", "image_id"]].merge(key_picture_filled, how="left", on="image_name")
-
-    key_picture.to_parquet(DATA_INTERMEDIATE_PATHS["key_pictures"])
+    key_pictures_images = key_pictures.loc[:, ["image_name", "image_id"]]
+    key_pictures_values = key_pictures.loc[:, ["valence_norm", "arousal_norm"]].dropna()
+    key_pictures_values = pd.concat([key_pictures_values] * 2).reset_index(drop=True)
+    key_pictures = pd.concat([key_pictures_images, key_pictures_values], axis=1)
+    key_pictures.to_parquet(DATA_INTERMEDIATE_PATHS["key_pictures"])
 
 
 def _single_base_cleaning(df: pd.DataFrame, transformer: BaseTransformer, filename: str) -> pd.DataFrame:
@@ -56,5 +54,5 @@ def perform_base_cleaning() -> None:
 
 
 if __name__ == "__main__":
-    perform_base_cleaning()
     prepare_key_pictures()
+    perform_base_cleaning()
