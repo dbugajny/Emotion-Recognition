@@ -14,6 +14,8 @@ TRANSFORMERS = {
     "rating": RatingTransformer(),
 }
 
+KEY_PICTURE_PATH = Path("data/01_raw/__documents/key_pic.xlsx")
+
 DATA_RAW_PATHS = {
     "annotations": Path("data/01_raw/annotations"),
     "bitalino": Path("data/01_raw/bitalino"),
@@ -40,4 +42,10 @@ DATA_PRIMARY_PATHS = {
     "rating": Path("data/03_primary/rating"),
 }
 
-KEY_PICTURE_PATH = Path("data/01_raw/__documents/key_pic.xlsx")
+DATA_FEATURES_PATHS = {
+    "annotations": Path("data/04_feature/annotations"),
+    "bitalino": Path("data/04_feature/bitalino"),
+    "fixations": Path("data/04_feature/fixations"),
+    "pupil_positions": Path("data/04_feature/pupil_positions"),
+    "rating": Path("data/04_feature/rating"),
+}

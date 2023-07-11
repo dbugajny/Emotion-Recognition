@@ -1,4 +1,5 @@
 from emotion_recognition.data_transformers.base_transformer import BaseTransformerFixPP
+import pandas as pd
 
 
 class PupilPositionsTransformer(BaseTransformerFixPP):
@@ -15,3 +16,10 @@ class PupilPositionsTransformer(BaseTransformerFixPP):
         ]
         self.rename_map = {"pupil_timestamp": "timestamp"}
         self.method = "2d c++"
+
+    def calculate_features(self, df: pd.DataFrame, confidence_threshold: float) -> pd.DataFrame:
+        df = df[df["confidence"] >= confidence_threshold].copy()
+
+        features = self.calculate_basic_stats(df, "diameter")
+
+        return features
