@@ -1,7 +1,7 @@
 from pathlib import Path
 import pandas as pd
 
-from constants import DATA_PRIMARY_PATHS, DATA_FEATURES_PATHS, TRANSFORMERS
+from constants import DATA_PRIMARY_PATHS, DATA_FEATURE_PATHS, TRANSFORMERS
 from parameters import confidence_threshold
 from tqdm import tqdm
 
@@ -9,11 +9,12 @@ from tqdm import tqdm
 def perform_features_calculating() -> None:
     data_sources = [
         "fixations",
-        "pupil_positions",
+        # "pupil_positions",
+        # "bitalino"
     ]
 
     for data_source in data_sources:
-        DATA_FEATURES_PATHS[data_source].mkdir(parents=True, exist_ok=True)
+        DATA_FEATURE_PATHS[data_source].mkdir(parents=True, exist_ok=True)
 
         for filepath in tqdm(
             DATA_PRIMARY_PATHS[data_source].iterdir(),
@@ -22,8 +23,12 @@ def perform_features_calculating() -> None:
         ):
             df = pd.read_parquet(filepath)
 
-            df = TRANSFORMERS[data_source].calculate_features(df, confidence_threshold)
-            df.to_parquet(DATA_FEATURES_PATHS[data_source] / Path(filepath.name))
+            if data_source == "bitalino":
+                df = TRANSFORMERS[data_source].calculate_features(df)
+            else:
+                df = TRANSFORMERS[data_source].calculate_features(df, confidence_threshold)
+
+            df.to_parquet(DATA_FEATURE_PATHS[data_source] / Path(filepath.name))
 
 
 if __name__ == "__main__":

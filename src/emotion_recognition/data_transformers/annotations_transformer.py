@@ -6,3 +6,4 @@ class AnnotationsTransformer(BaseTransformer):
         super().__init__()
         self.columns_to_keep = ["timestamp", "UnityTriggertrigger"]
         self.rename_map = {"UnityTriggertrigger": "image_id"}
+        self.cast_map = {"timestamp": float, "image_id": int}

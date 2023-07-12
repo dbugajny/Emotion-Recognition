@@ -42,10 +42,14 @@ DATA_PRIMARY_PATHS = {
     "rating": Path("data/03_primary/rating"),
 }
 
-DATA_FEATURES_PATHS = {
+DATA_FEATURE_PATHS = {
     "annotations": Path("data/04_feature/annotations"),
     "bitalino": Path("data/04_feature/bitalino"),
     "fixations": Path("data/04_feature/fixations"),
     "pupil_positions": Path("data/04_feature/pupil_positions"),
     "rating": Path("data/04_feature/rating"),
+}
+
+DATA_MODEL_INPUT_PATHS = {
+    "features_merged": Path("data/05_model_input/features_merged.parquet"),
 }

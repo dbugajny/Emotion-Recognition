@@ -10,6 +10,7 @@ class RatingTransformer(BaseTransformer):
             "Valence_rating.response": "valence_rating",
             "Arousal_rating.response": "arousal_rating",
         }
+        self.cast_map = {"image_name": str, "valence_rating": int, "arousal_rating": int}
 
     @staticmethod
     def merge_with_key_pictures(df, df_key_pictures):
