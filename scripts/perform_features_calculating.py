@@ -1,17 +1,13 @@
 from pathlib import Path
-import pandas as pd
 
-from constants import DATA_PRIMARY_PATHS, DATA_FEATURE_PATHS, TRANSFORMERS
+import pandas as pd
+from constants import DATA_FEATURE_PATHS, DATA_PRIMARY_PATHS, TRANSFORMERS
 from parameters import confidence_threshold
 from tqdm import tqdm
 
 
 def perform_features_calculating() -> None:
-    data_sources = [
-        "fixations",
-        # "pupil_positions",
-        # "bitalino"
-    ]
+    data_sources = ["fixations", "pupil_positions", "bitalino"]
 
     for data_source in data_sources:
         DATA_FEATURE_PATHS[data_source].mkdir(parents=True, exist_ok=True)

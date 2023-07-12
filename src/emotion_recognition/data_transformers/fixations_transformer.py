@@ -1,8 +1,8 @@
-from emotion_recognition.data_transformers.base_transformer import BaseTransformerFixPP
-from emotion_recognition.data_transformers.utils import calculate_basic_stats
-from emotion_recognition.data_transformers.utils import merge_columns
-import pandas as pd
 import numpy as np
+import pandas as pd
+
+from emotion_recognition.data_transformers.base_transformer import BaseTransformerFixPP
+from emotion_recognition.utils import calculate_basic_stats, merge_columns
 
 
 class FixationsTransformer(BaseTransformerFixPP):

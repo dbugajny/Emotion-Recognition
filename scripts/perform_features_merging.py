@@ -1,8 +1,10 @@
-import pandas as pd
 from functools import reduce
+
+import pandas as pd
 from constants import DATA_FEATURE_PATHS, DATA_MODEL_INPUT_PATHS
 from tqdm import tqdm
-from emotion_recognition.data_transformers.utils import merge_columns
+
+from emotion_recognition.utils import merge_columns
 
 
 def perform_features_merging() -> None:
