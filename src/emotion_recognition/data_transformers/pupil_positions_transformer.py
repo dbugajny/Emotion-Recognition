@@ -17,7 +17,7 @@ class PupilPositionsTransformer(BaseTransformerFixPP):
         ]
         self.rename_map = {"pupil_timestamp": "timestamp"}
         self.cast_map = {
-            "pupil_timestamp": float,
+            "timestamp": float,
             "eye_id": float,
             "confidence": float,
             "norm_pos_x": float,

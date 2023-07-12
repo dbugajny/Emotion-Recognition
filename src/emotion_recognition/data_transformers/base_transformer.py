@@ -10,7 +10,7 @@ class BaseTransformer:
         self.cast_map = {}
 
     def perform_base_cleaning(self, df: pd.DataFrame) -> pd.DataFrame:
-        return df.loc[:, self.columns_to_keep].rename(columns=self.rename_map).astype(self.cast_map).drop_duplicates()
+        return df.loc[:, self.columns_to_keep].rename(columns=self.rename_map).dropna(subset=self.dropna_columns, how="any").astype(self.cast_map)
 
     @staticmethod
     def extract_person_id(df: pd.DataFrame, filename: str) -> pd.DataFrame:
