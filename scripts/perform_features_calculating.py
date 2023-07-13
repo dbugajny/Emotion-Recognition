@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pandas as pd
 from constants import DATA_FEATURE_PATHS, DATA_PRIMARY_PATHS, TRANSFORMERS
-from parameters import confidence_threshold
+from hyperparameters import CONFIDENCE_THRESHOLD
 from tqdm import tqdm
 
 
@@ -22,7 +22,7 @@ def perform_features_calculating() -> None:
             if data_source == "bitalino":
                 df = TRANSFORMERS[data_source].calculate_features(df)
             else:
-                df = TRANSFORMERS[data_source].calculate_features(df, confidence_threshold)
+                df = TRANSFORMERS[data_source].calculate_features(df, CONFIDENCE_THRESHOLD)
 
             df.to_parquet(DATA_FEATURE_PATHS[data_source] / Path(filepath.name))
 

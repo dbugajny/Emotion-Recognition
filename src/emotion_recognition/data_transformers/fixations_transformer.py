@@ -24,9 +24,11 @@ class FixationsTransformer(BaseTransformerFixPP):
     def calculate_features(df: pd.DataFrame, confidence_threshold: float) -> pd.DataFrame:
         df = df.dropna(subset=["person_id", "image_id"], how="any")
         df_features = df[df["confidence"] >= confidence_threshold].copy()
+
         df_features["fixation_duration"] = np.roll(df_features["timestamp"].diff(), -1)
-        features = calculate_basic_stats(df_features, "fixation_duration")
+        features_fixation_duration = calculate_basic_stats(df_features, "fixation_duration")
         fixations_count = df_features.groupby(merge_columns)["timestamp"].count().reset_index(name="n_fixations")
-        features = features.merge(fixations_count, how="outer", on=merge_columns)
+
+        features = features_fixation_duration.merge(fixations_count, how="outer", on=merge_columns)
 
         return features

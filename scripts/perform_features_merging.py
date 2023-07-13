@@ -8,11 +8,7 @@ from emotion_recognition.utils import merge_columns
 
 
 def perform_features_merging() -> None:
-    data_sources = [
-        "fixations",
-        "pupil_positions",
-        "bitalino",
-    ]
+    data_sources = ["fixations", "pupil_positions", "bitalino"]
 
     lst_features_merged = []
 

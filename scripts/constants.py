@@ -53,3 +53,7 @@ DATA_FEATURE_PATHS = {
 DATA_MODEL_INPUT_PATHS = {
     "features_merged": Path("data/05_model_input/features_merged.parquet"),
 }
+
+DATA_MODELS_PATHS = {
+    "best_model_valence_rating": Path("data/06_models/best_model_valence_rating.pkl"),
+}
