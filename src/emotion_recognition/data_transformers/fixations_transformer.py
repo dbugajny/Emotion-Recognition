@@ -11,7 +11,7 @@ class FixationsTransformer(BaseTransformerFixPP):
         self.columns_to_keep = ["start_timestamp", "norm_pos_x", "norm_pos_y", "dispersion", "confidence", "method"]
         self.rename_map = {"start_timestamp": "timestamp"}
         self.cast_map = {
-            "start_timestamp": float,
+            "timestamp": float,
             "norm_pos_x": float,
             "norm_pos_y": float,
             "dispersion": float,
