@@ -1,5 +1,6 @@
-from emotion_recognition.data_transformers.base_transformer import BaseTransformer
 import pandas as pd
+
+from emotion_recognition.data_transformers.base_transformer import BaseTransformer
 
 
 class RatingTransformer(BaseTransformer):
@@ -12,7 +13,7 @@ class RatingTransformer(BaseTransformer):
             "Arousal_rating.response": "arousal_rating",
         }
         self.cast_map = {"image_name": str, "valence_rating": int, "arousal_rating": int}
-        self.dropna_columns = ["image_name", "valence_rating", "arousal_rating"]
+        self.dropna_columns = ["image9", "Valence_rating.response", "Arousal_rating.response"]
 
     @staticmethod
     def merge_with_key_pictures(df, df_key_pictures):
@@ -21,8 +22,7 @@ class RatingTransformer(BaseTransformer):
         )
 
     def perform_base_cleaning(self, df: pd.DataFrame) -> pd.DataFrame:
-        df = df[(df[self.columns_to_keep] != "None").all(axis=1)]
+        df = df[(df[self.columns_to_keep] != "None").all(axis=1)].dropna(subset=self.dropna_columns, how="any")
         df = super().perform_base_cleaning(df)
-        df = df.dropna(subset=self.dropna_columns, how="any")
 
         return df

@@ -20,7 +20,7 @@ class BaseTransformer:
 class BaseTransformerFixPP(BaseTransformer):
     def __init__(self) -> None:
         super().__init__()
-        self.method = []
+        self.method = None
 
     def perform_base_cleaning(self, df: pd.DataFrame) -> pd.DataFrame:
         df = super().perform_base_cleaning(df)
