@@ -9,7 +9,7 @@ class BitalinoTransformer(BaseTransformer):
         super().__init__()
         self.columns_to_keep = ["EKG", "light", "EDA", "HR", "trigger"]
         self.rename_map = {"trigger": "image_id"}
-        self.cast_map = {"EKG": float, "light": float, "EDA": float, "HR": float, "trigger": int}
+        self.cast_map = {"EKG": float, "light": float, "EDA": float, "HR": float, "image_id": int}
 
     @staticmethod
     def merge_with_ratings(df, df_ratings):
