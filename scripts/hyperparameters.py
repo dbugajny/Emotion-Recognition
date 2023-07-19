@@ -1,5 +1,5 @@
 from scipy.stats import loguniform
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import AdaBoostClassifier, RandomForestClassifier
 from sklearn.svm import SVC
 
 CONFIDENCE_THRESHOLD = 0.7
@@ -12,6 +12,9 @@ MODEL_HYPERPARAMETERS = {
         "hyperparameters": {
             "n_estimators": range(10, 100, 5),
             "max_depth": range(3, 10, 1),
+            "min_samples_split": range(2, 10, 1),
+            "min_samples_leaf": range(1, 3, 1),
+            "max_features": ["sqrt", "log2"],
         },
     },
     "svc": {
@@ -19,6 +22,12 @@ MODEL_HYPERPARAMETERS = {
         "hyperparameters": {
             "kernel": ["linear", "poly", "rbf"],
             "C": loguniform(1e-3, 1),
+        },
+    },
+    "adaboost": {
+        "model": AdaBoostClassifier(),
+        "hyperparameters": {
+            "n_estimators": range(100, 501, 50),
         },
     },
 }

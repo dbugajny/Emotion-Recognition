@@ -18,6 +18,8 @@ def perform_features_calculating() -> None:
             desc=f"Processing {DATA_PRIMARY_PATHS[data_source].stem} directory.",
         ):
             df = pd.read_parquet(filepath)
+            if df.empty:
+                continue
 
             if data_source == "bitalino":
                 df = TRANSFORMERS[data_source].calculate_features(df)

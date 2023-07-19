@@ -1,7 +1,11 @@
+import logging
+
 import numpy as np
 import pandas as pd
 from sklearn.impute import SimpleImputer
 from sklearn.model_selection import RandomizedSearchCV
+
+logger = logging.getLogger()
 
 
 def input_missing_values(X: pd.DataFrame, strategy: str) -> pd.DataFrame:
@@ -14,6 +18,7 @@ def get_best_model(
     models_scores = {}
 
     for model_name in model_hyperparameters.keys():
+        logging.info(f"Training {model_name} model")
         single_model = model_hyperparameters[model_name]["model"]
         single_model_hyperparameters = model_hyperparameters[model_name]["hyperparameters"]
 
