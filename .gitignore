@@ -7,3 +7,4 @@ data/*
 !data/.gitkeep
 notebooks/private/*
 !notebooks/private/.gitkeep
+*.pyc
