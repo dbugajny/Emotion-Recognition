@@ -8,14 +8,14 @@ from emotion_recognition.model_training import get_best_model, input_missing_val
 
 
 def perform_model_training(y_column):
-    dataset = pd.read_parquet(DATA_MODEL_INPUT_PATHS["features_merged"])
+    dataset_train = pd.read_parquet(DATA_MODEL_INPUT_PATHS["dataset_train"])
 
-    X = dataset.loc[:, X_COLUMNS]
-    X = input_missing_values(X, "median")
+    X_train = dataset_train.loc[:, X_COLUMNS]
+    X_train = input_missing_values(X_train, "median")
 
-    y = dataset.loc[:, y_column]
+    y_train = dataset_train.loc[:, y_column]
 
-    best_model = get_best_model(X, y, MODEL_HYPERPARAMETERS, cv=CV, n_iter=N_ITER)
+    best_model = get_best_model(X_train, y_train, MODEL_HYPERPARAMETERS, cv=CV, n_iter=N_ITER)
 
     with open(DATA_MODELS_PATHS[f"best_model_{y_column}"], "wb") as f:
         pickle.dump(best_model, f)

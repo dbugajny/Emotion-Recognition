@@ -51,7 +51,8 @@ DATA_FEATURE_PATHS = {
 }
 
 DATA_MODEL_INPUT_PATHS = {
-    "features_merged": Path("data/05_model_input/features_merged.parquet"),
+    "dataset_train": Path("data/05_model_input/dataset_train.parquet"),
+    "dataset_test": Path("data/05_model_input/dataset_test.parquet"),
 }
 
 DATA_MODELS_PATHS = {
