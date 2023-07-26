@@ -23,3 +23,4 @@ def perform_model_training(y_column):
 
 if __name__ == "__main__":
     perform_model_training("valence_rating")
+    perform_model_training("arousal_rating")

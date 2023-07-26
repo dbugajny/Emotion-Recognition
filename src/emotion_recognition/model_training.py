@@ -6,6 +6,7 @@ from sklearn.impute import SimpleImputer
 from sklearn.model_selection import RandomizedSearchCV
 
 logger = logging.getLogger()
+logger.setLevel(logging.INFO)
 
 
 def input_missing_values(X: pd.DataFrame, strategy: str) -> pd.DataFrame:

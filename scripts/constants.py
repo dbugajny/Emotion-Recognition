@@ -57,4 +57,5 @@ DATA_MODEL_INPUT_PATHS = {
 
 DATA_MODELS_PATHS = {
     "best_model_valence_rating": Path("data/06_models/best_model_valence_rating.pkl"),
+    "best_model_arousal_rating": Path("data/06_models/best_model_arousal_rating.pkl"),
 }

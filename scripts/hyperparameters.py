@@ -1,14 +1,14 @@
 from scipy.stats import loguniform
-from sklearn.ensemble import AdaBoostClassifier, RandomForestClassifier
-from sklearn.svm import SVC
+from sklearn.ensemble import AdaBoostRegressor, RandomForestRegressor
+from sklearn.svm import SVR
 
 CONFIDENCE_THRESHOLD = 0.7
 CV = 5
-N_ITER = 2
+N_ITER = 20
 
 MODEL_HYPERPARAMETERS = {
     "random_forest": {
-        "model": RandomForestClassifier(),
+        "model": RandomForestRegressor(),
         "hyperparameters": {
             "n_estimators": range(10, 100, 5),
             "max_depth": range(3, 10, 1),
@@ -17,17 +17,17 @@ MODEL_HYPERPARAMETERS = {
             "max_features": ["sqrt", "log2"],
         },
     },
-    "svc": {
-        "model": SVC(),
+    "svr": {
+        "model": SVR(),
         "hyperparameters": {
             "kernel": ["linear", "poly", "rbf"],
             "C": loguniform(1e-3, 1),
         },
     },
     "adaboost": {
-        "model": AdaBoostClassifier(),
+        "model": AdaBoostRegressor(),
         "hyperparameters": {
-            "n_estimators": range(100, 501, 50),
+            "n_estimators": range(100, 1001, 10),
         },
     },
 }
